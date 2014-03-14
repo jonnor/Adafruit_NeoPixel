@@ -42,9 +42,7 @@ Adafruit_NeoPixel::Adafruit_NeoPixel(uint16_t n, uint8_t p, uint8_t t) : numLEDs
    pinMask(digitalPinToBitMask(p))
 #endif
 {
-  if((pixels = (uint8_t *)malloc(numBytes))) {
-    memset(pixels, 0, numBytes);
-  }
+    setNumber(n);
 }
 
 Adafruit_NeoPixel::~Adafruit_NeoPixel() {
@@ -55,6 +53,15 @@ Adafruit_NeoPixel::~Adafruit_NeoPixel() {
 void Adafruit_NeoPixel::begin(void) {
   pinMode(pin, OUTPUT);
   digitalWrite(pin, LOW);
+}
+
+void Adafruit_NeoPixel::setNumber(uint16_t n) {
+    numLEDs = n;
+    numBytes = (n * 3);
+    if (pixels) free(pixels);
+    if((pixels = (uint8_t *)malloc(numBytes))) {
+      memset(pixels, 0, numBytes);
+    }
 }
 
 void Adafruit_NeoPixel::show(void) {

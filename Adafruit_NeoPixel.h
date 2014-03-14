@@ -50,6 +50,7 @@ class Adafruit_NeoPixel {
   void
     begin(void),
     show(void),
+    setNumber(uint16_t n),
     setPin(uint8_t p),
     setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b),
     setPixelColor(uint16_t n, uint32_t c),
@@ -65,7 +66,7 @@ class Adafruit_NeoPixel {
 
  private:
 
-  const uint16_t
+  uint16_t
     numLEDs,       // Number of RGB LEDs in strip
     numBytes;      // Size of 'pixels' buffer below
 #if defined(NEO_RGB) || defined(NEO_KHZ400)
